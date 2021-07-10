@@ -8,5 +8,8 @@ namespace TheCCPConnectionAPI_POC.Services
 {
     public class RequestService : IRequestService
     {
+
+        //Services are encapsulated classes that gets data (using Dapper?) and turns it into JSON  -- why use Interface???
+
     }
 }

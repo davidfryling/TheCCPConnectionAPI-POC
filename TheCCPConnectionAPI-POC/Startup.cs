@@ -30,9 +30,10 @@ namespace TheCCPConnectionAPI_POC
         {
             services.AddControllers();
 
+            //ADDED to tell app to use service classes -- look into difference between AddSingleton and AddTransient methods
             services.AddSingleton<IConfiguration>(Configuration);
             Global.ConnectionString = Configuration.GetConnectionString("TheCCPconnectionAPI_POC");
-
+            //ADDED -- look into AddScoped method
             services.AddScoped<IRequestService, RequestService>();
         }
 

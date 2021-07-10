@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TheCCPConnectionAPI_POC.Models
 {
     public class Request
     {
-        public int RequestId { get; set; }
-        public DateTime RequestTimeStamp { get; set; }
-        public string RequestCourseName { get; set; }
-        public float RequestCourseCreditHours { get; set; }
-        public string RequestCourseTerm { get; set; }
+
+        public int Id { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public string CourseName { get; set; }
+        public float CourseCreditHours { get; set; }
+        public string CourseTerm { get; set; }
+
+        public string ToJson() => JsonSerializer.Serialize<Request>(this);
 
     }
 }
