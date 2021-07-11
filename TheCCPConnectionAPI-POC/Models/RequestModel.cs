@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheCCPConnectionAPI_POC.Models
 {
-    public class Request
+    public class RequestModel
     {
 
         public int Id { get; set; }
@@ -15,7 +15,8 @@ namespace TheCCPConnectionAPI_POC.Models
         public float CourseCreditHours { get; set; }
         public string CourseTerm { get; set; }
 
-        public string ToJson() => JsonSerializer.Serialize<Request>(this);
+        //do I want this here? seems like this should be in the service...
+        //public string ToJson() => JsonSerializer.Serialize<RequestModel>(this);
 
     }
 }

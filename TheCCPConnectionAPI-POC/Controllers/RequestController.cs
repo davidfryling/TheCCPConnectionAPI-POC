@@ -15,6 +15,6 @@ namespace TheCCPConnectionAPI_POC.Controllers
 
         // build property to hold intantiated RequestService { get; } only get for now
 
-        // build method to Get() with [HttpGet] attribute to return instantiatiated RequestService that has some sort of IEnumerable that returns serialized JSON
+        // build method to Get()/Post()/Put() with [HttpGet]/[HttpPost]/[HttpPut] attribute to return instantiatiated RequestService that has some sort of IEnumerable that returns serialized JSON
     }
 }

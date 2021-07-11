@@ -30,11 +30,11 @@ namespace TheCCPConnectionAPI_POC
         {
             services.AddControllers();
 
-            //ADDED to tell app to use service classes -- look into difference between AddSingleton and AddTransient methods
+            //ADDED to tell app to use connections string and service classes 
             services.AddSingleton<IConfiguration>(Configuration);
-            Global.ConnectionString = Configuration.GetConnectionString("TheCCPconnectionAPI_POC");
-            //ADDED -- look into AddScoped method
-            services.AddScoped<IRequestService, RequestService>();
+            Global.ConnectionString = Configuration.GetConnectionString("TheCCPconnectionAPI-POC");
+
+            //services.AddScoped<IRequestService, RequestService>(); //Can I remove direct call of RequestService with dependency injection?
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
