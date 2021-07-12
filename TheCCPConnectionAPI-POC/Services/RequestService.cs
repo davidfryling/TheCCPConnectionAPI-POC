@@ -42,7 +42,7 @@ namespace TheCCPConnectionAPI_POC.Services
         private DynamicParameters SetParameters(Request request)
         {
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@requestTimestamp", request.Id);
+            parameters.Add("@requestTimestamp", request.Timestamp);
             parameters.Add("@requestCourseName", request.CourseName);
             parameters.Add("@requestCourseCreditHours", request.CourseCreditHours);
             parameters.Add("@requestCourseTerm)", request.CourseTerm);

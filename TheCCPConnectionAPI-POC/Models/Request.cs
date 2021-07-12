@@ -10,7 +10,7 @@ namespace TheCCPConnectionAPI_POC.Models
     {
 
         public int Id { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public DateTime Timestamp { get; set; }
         public string CourseName { get; set; }
         public float CourseCreditHours { get; set; }
         public string CourseTerm { get; set; }
