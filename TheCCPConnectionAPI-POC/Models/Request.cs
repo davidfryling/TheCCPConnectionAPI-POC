@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheCCPConnectionAPI_POC.Models
 {
-    public class RequestModel
+    public class Request
     {
 
         public int Id { get; set; }
@@ -15,7 +15,7 @@ namespace TheCCPConnectionAPI_POC.Models
         public float CourseCreditHours { get; set; }
         public string CourseTerm { get; set; }
 
-        //do I want this here? seems like this should be in the service...
+        //TODO REMOVE --do I want this here? seems like this should be in the service... -- user Utf8JsonWriter??
         //public string ToJson() => JsonSerializer.Serialize<RequestModel>(this);
 
     }

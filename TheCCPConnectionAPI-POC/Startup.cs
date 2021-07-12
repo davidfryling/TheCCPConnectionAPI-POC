@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheCCPConnectionAPI_POC.Common;
-using TheCCPConnectionAPI_POC.IServices;
 using TheCCPConnectionAPI_POC.Services;
 
 namespace TheCCPConnectionAPI_POC
@@ -33,8 +32,9 @@ namespace TheCCPConnectionAPI_POC
             //ADDED to tell app to use connections string and service classes 
             services.AddSingleton<IConfiguration>(Configuration);
             Global.ConnectionString = Configuration.GetConnectionString("TheCCPconnectionAPI-POC");
-
-            //services.AddScoped<IRequestService, RequestService>(); //Can I remove direct call of RequestService with dependency injection?
+            
+            //ADDED to map interface to the class that implements it (replaces entire packages such as Autofac)
+            services.AddScoped<IRequestService, RequestService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

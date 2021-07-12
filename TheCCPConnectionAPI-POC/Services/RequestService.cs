@@ -2,22 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TheCCPConnectionAPI_POC.Models;
+using Dapper;
+using System.Data;
+using System.Data.SqlClient;
+using TheCCPConnectionAPI_POC.Common;
 
 namespace TheCCPConnectionAPI_POC.Services
 {
-    public class RequestService
+    public class RequestService : IRequestService
     {
 
-        //Services are encapsulated classes that gets data and turns it into JSON -- create Interface for dependency injection
+        //Services are simply encapsulated classes that get data from the dB and turn it into the C# object 
+        
+        public List<Request> GetAllRequests()
+        {
+            using (IDbConnection connection = new SqlConnection(Global.ConnectionString))
+            {
+                if (connection.State == ConnectionState.Closed) connection.Open();
 
-        //STEP 1 - Figure out how to use dapper to CRUD database (Tim Corey Dapper tutorial) -- encapsulate universal dapper stuff
+                return connection.Query<Request>("EXEC GetAllRequestsStoredProcedure").ToList();
+            }
+        }
 
+        public Request AddRequest(Request request)
+        {
+            using (IDbConnection connection = new SqlConnection(Global.ConnectionString))
+            {
+                if (connection.State == ConnectionState.Closed) connection.Open();
 
+                string sql = "EXEC InsertNewRequestStoredProcedure";
 
-        //STEP 2 - Add JSON serialization (ASP.NET Core 101 video) -- encapsulate serialization in its own class, do not repeat code in each of these services -- user Utf8JsonWriter?
+                connection.Execute(sql, this.SetParameters(request), commandType: CommandType.StoredProcedure);
 
+                return request;
+            }
+        }
 
+        private DynamicParameters SetParameters(Request request)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@requestTimestamp", request.Id);
+            parameters.Add("@requestCourseName", request.CourseName);
+            parameters.Add("@requestCourseCreditHours", request.CourseCreditHours);
+            parameters.Add("@requestCourseTerm)", request.CourseTerm);
 
-        //STEP 3 - Add Interface of this class (Tim Corey Dependency Injection tutorial)
+            return parameters;
+        }
     }
 }
