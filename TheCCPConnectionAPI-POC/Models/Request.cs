@@ -8,14 +8,16 @@ namespace TheCCPConnectionAPI_POC.Models
 {
     public class Request
     {
+        //FULL VERSION NOTE -- Dapper maps models and tables by names, so the property and column name must be identical
 
         public int Id { get; set; }
         public DateTime Timestamp { get; set; }
         public string CourseName { get; set; }
         public float CourseCreditHours { get; set; }
         public string CourseTerm { get; set; }
+        public string Message { get; set; }
 
-        //TODO REMOVE --do I want this here? seems like this should be in the service... -- user Utf8JsonWriter??
+        //FULL VERSION TODO -- Is there a use case for code below?
         //public string ToJson() => JsonSerializer.Serialize<RequestModel>(this);
 
     }

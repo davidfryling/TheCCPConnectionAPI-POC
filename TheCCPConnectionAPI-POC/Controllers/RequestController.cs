@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TheCCPConnectionAPI_POC.IServices;
 using TheCCPConnectionAPI_POC.Models;
-using TheCCPConnectionAPI_POC.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

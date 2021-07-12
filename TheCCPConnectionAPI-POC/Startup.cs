@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheCCPConnectionAPI_POC.Common;
+using TheCCPConnectionAPI_POC.IServices;
 using TheCCPConnectionAPI_POC.Services;
 
 namespace TheCCPConnectionAPI_POC
@@ -29,11 +30,10 @@ namespace TheCCPConnectionAPI_POC
         {
             services.AddControllers();
 
-            //ADDED to tell app to use connections string and service classes 
-            services.AddSingleton<IConfiguration>(Configuration);
+            //FULL VERSION NOTE -- Add code below to tell app to use connections string and service classes 
             Global.ConnectionString = Configuration.GetConnectionString("TheCCPconnectionAPI-POC");
-            
-            //ADDED to map interface to the class that implements it (replaces entire packages such as Autofac)
+
+            //FULL VERSION NOTE -- Add code below to map interface to the class that implements it (replaces entire packages such as Autofac)
             services.AddScoped<IRequestService, RequestService>();
         }
 
