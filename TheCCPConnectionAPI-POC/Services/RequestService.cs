@@ -13,11 +13,14 @@ namespace TheCCPConnectionAPI_POC.Services
 {
     public class RequestService : IRequestService
     {
-        //FULL VERSON TODO -- Take time to map this patter onto all dB objects and models so that it goes smoothly at full scale
+        //FULL VERSON TODO -- Take time to map this pattern onto all dB objects and models so that it goes smoothly at full scale
 
         Request _oRequest = new Request();
         List<Request> _oRequests = new List<Request>();
 
+        //FULL VERSION TODO -- create parament to that the requests pulled are only for the user type
+        //Example, student gets all of THEIR request for term selected, while parent for all of their students
+        //and counselors/advisors for all of the students in their high school
         public List<Request> GetAllRequests()
         {
             _oRequests = new List<Request>();

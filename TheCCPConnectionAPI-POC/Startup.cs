@@ -30,6 +30,18 @@ namespace TheCCPConnectionAPI_POC
         {
             services.AddControllers();
 
+            //THIS ALLOWS API TO RUN ON LOCAL HOST WITHOUT ERRORS -- IS THIS A SECURITY ISSUE IN PRODUCTION??
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    name: "AllowOrigin",
+                    builder => {
+                        builder.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
+                    });
+            });
+
             //FULL VERSION NOTE -- Add code below to tell app to use connections string and service classes 
             Global.ConnectionString = Configuration.GetConnectionString("TheCCPconnectionAPI-POC");
 
@@ -40,6 +52,9 @@ namespace TheCCPConnectionAPI_POC
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //THIS ALLOWS API TO RUN ON LOCAL HOST WITHOUT ERRORS -- IS THIS A SECURITY ISSUE IN PRODUCTION??
+            app.UseCors("AllowOrigin");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
