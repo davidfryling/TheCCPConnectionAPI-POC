@@ -25,7 +25,7 @@ namespace TheCCPConnectionAPI_POC.Controllers
             _requestService = requestService;
         }
 
-        // GET: api/<RequestController>
+        //GET: api/<RequestController>
         [HttpGet]
         public IEnumerable<Request> Get()
         {
@@ -39,7 +39,7 @@ namespace TheCCPConnectionAPI_POC.Controllers
         //    return "value";
         //}
 
-        // POST api/<RequestController>
+        //POST api/<RequestController>
         [HttpPost]
         public Request Post([FromBody] Request request)
         {
@@ -50,16 +50,18 @@ namespace TheCCPConnectionAPI_POC.Controllers
             return null;
         }
 
-        //NOT IMPLEMENTED PUT api/<RequestController>/5
+        //NOT IMPLEMENTED
+        //PUT api/<RequestController>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)
         //{
         //}
 
-        //NOT IMPLEMENTED DELETE api/<RequestController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        //DELETE api/<RequestController>/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return await _requestService.DeleteRequest(id);
+        }
     }
 }

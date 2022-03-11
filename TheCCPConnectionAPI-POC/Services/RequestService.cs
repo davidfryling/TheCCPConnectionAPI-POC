@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using TheCCPConnectionAPI_POC.Common;
 using TheCCPConnectionAPI_POC.IServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TheCCPConnectionAPI_POC.Services
 {
@@ -50,7 +51,7 @@ namespace TheCCPConnectionAPI_POC.Services
                 {
                     if (connection.State == ConnectionState.Closed) connection.Open();
 
-                    var oRequests = connection.Query<Request>("dbo.InsertNewRequestStoredProcedure", this.SetParameters(request), commandType: CommandType.StoredProcedure);
+                    var oRequests = connection.Query<Request>("dbo.InsertNewRequestStoredProcedure", this.SetPostParameters(request), commandType: CommandType.StoredProcedure);
                     
                     if (oRequests != null && oRequests.Count() > 0)
                     {
@@ -66,16 +67,36 @@ namespace TheCCPConnectionAPI_POC.Services
             return _oRequest;
         }
 
-        private DynamicParameters SetParameters(Request request)
+        private DynamicParameters SetPostParameters(Request request)
         {
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@Id", request.Id);
             parameters.Add("@Timestamp", request.Timestamp);
             parameters.Add("@CourseName", request.CourseName);
             parameters.Add("@CourseCreditHours", request.CourseCreditHours);
             parameters.Add("@CourseTerm", request.CourseTerm);
 
             return parameters;
+        }
+
+        public async Task<IActionResult> DeleteRequest(int id)
+        {
+
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(Global.ConnectionString))
+                {
+                    if (connection.State == ConnectionState.Closed) connection.Open();
+
+                    await connection.ExecuteAsync("dbo.DeleteRequestStoredProcedure", new { Id = id }, commandType: CommandType.StoredProcedure);
+                }
+
+                return new OkResult();
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.ToString());
+            }
+
         }
     }
 }

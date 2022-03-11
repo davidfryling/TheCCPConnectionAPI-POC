@@ -42,10 +42,10 @@ namespace TheCCPConnectionAPI_POC
                     });
             });
 
-            //FULL VERSION NOTE -- Add code below to tell app to use connections string and service classes 
+            //FULL VERSION NOTE -- Add code below to tell app to use connections string and USE AZURE KEY VAULT
             Global.ConnectionString = Configuration.GetConnectionString("TheCCPconnectionAPI-POC");
 
-            //FULL VERSION NOTE -- Add code below to map interface to the class that implements it (replaces entire packages such as Autofac)
+            //FULL VERSION NOTE -- Add code below to map interface to the class that implements it
             services.AddScoped<IRequestService, RequestService>();
         }
 
